@@ -1,5 +1,6 @@
 package com.XXXYJade17.XpSystem;
 
+import com.XXXYJade17.XpSystem.Capibility.ModCapabilities;
 import com.XXXYJade17.XpSystem.Config.XpConfig;
 import com.XXXYJade17.XpSystem.Event.HideVanillaXpHudEvent;
 import com.XXXYJade17.XpSystem.Event.ModEvents;

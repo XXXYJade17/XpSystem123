@@ -12,10 +12,10 @@ public class PlayerXpProvider implements ICapabilityProvider<Player, Void, Playe
     private PlayerXp xp;
 
     private PlayerXp getPlayerXp() {
-        if (this.xp == null) {
-            this.xp = new PlayerXp();
+        if (xp == null) {
+            xp = new PlayerXp();
         }
-        return this.xp;
+        return xp;
     }
 
     @Override
