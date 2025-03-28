@@ -23,20 +23,24 @@ public class ModEvents {
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if(event.side == LogicalSide.SERVER) {
+        LOGGER.info("Player tick event triggered. Side: {}", event.side);
+        if (event.side == LogicalSide.SERVER) {
             Optional<PlayerXp> optionalPlayerXp = Optional.ofNullable(event.player.getCapability(ModCapabilities.PLAYER_XP_HANDLER));
-            optionalPlayerXp.ifPresent(xp -> {
-                if(++tickCounter >= TICKS_PER_MINUTE) {
-                    tickCounter = 0;
-                    xp.addXp(1);
-                    if(event.player instanceof ServerPlayer player) {
-                        PacketDistributor.PLAYER.with(player)
-                                .send(new PlayerData(xp.getXp(), xp.getLevel()));
-                        LOGGER.info("Player XP:{}",xp.getXp());
-                        player.sendSystemMessage(Component.literal("当前XP:"+xp.getXp()));
+            if (optionalPlayerXp.isEmpty()) {
+                LOGGER.info("Player XP capability is null for player: {}", event.player.getName().getString());
+                optionalPlayerXp.ifPresent(xp -> {
+                    if (++tickCounter >= TICKS_PER_MINUTE) {
+                        tickCounter = 0;
+                        xp.addXp(1);
+                        if (event.player instanceof ServerPlayer player) {
+                            PacketDistributor.PLAYER.with(player)
+                                    .send(new PlayerData(xp.getXp(), xp.getLevel()));
+                            LOGGER.info("Player XP:{}", xp.getXp());
+                            player.sendSystemMessage(Component.literal("当前XP:" + xp.getXp()));
+                        }
                     }
-                }
-            });
+                });
+            }
         }
     }
 }

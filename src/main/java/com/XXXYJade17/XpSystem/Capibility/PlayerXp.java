@@ -8,7 +8,11 @@ public class PlayerXp {
     private int level=1;
 
     public void addXp(int addedXp){
-        xp+=addedXp;
+        this.xp+=addedXp;
+        while (this.xp >= getRequiredXp(level)) {
+            this.xp -= getRequiredXp(level);
+            this.level++;
+        }
     }
 
     public int getRequiredXp(int level){

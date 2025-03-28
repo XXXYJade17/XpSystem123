@@ -20,8 +20,8 @@ public class XpSystem
 
     public XpSystem(IEventBus modEventBus, ModContainer modContainer) {
         XP_CONFIG = XpConfig.getINSTANCE();
-        NeoForge.EVENT_BUS.register(HideVanillaXpHudEvent.class);
         NeoForge.EVENT_BUS.register(ModEvents.class);
+        NeoForge.EVENT_BUS.register(HideVanillaXpHudEvent.class);
     }
 
     public static Logger getLOGGER(){
