@@ -32,6 +32,6 @@ public class PlayerXpProvider implements ICapabilityProvider<Player, Void, Playe
 
     @Override
     public @Nullable PlayerXp getCapability(Player o, Void unused) {
-        return xp;
+        return getPlayerXp();
     }
 }
